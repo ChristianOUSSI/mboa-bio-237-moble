@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Les six couleurs de la charte, dupliquees ici pour le splash natif.
+         Toute autre valeur est une faute de charte. -->
+    <color name="mboa_primary">#1E5128</color>
+    <color name="mboa_secondary">#8BC34A</color>
+    <color name="mboa_background">#F8F9E9</color>
+    <color name="mboa_surface">#FFFFFF</color>
+    <color name="mboa_error">#D32F2F</color>
+    <color name="mboa_text">#212121</color>
+</resources>

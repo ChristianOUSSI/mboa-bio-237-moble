@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      Le debug et le profile autorisent le reseau clair : c'est ce qui permet
+      de pointer un Supabase local (http://localhost:54321) pendant le
+      developpement. Le manifeste principal, lui, reste en HTTPS only.
+    -->
+    <application android:usesCleartextTraffic="true"/>
+</manifest>

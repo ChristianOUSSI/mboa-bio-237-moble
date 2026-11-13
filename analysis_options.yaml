@@ -1,0 +1,19 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Un pictogramme sans semanticLabel est un bouton muet pour le TTS : c'est
+    # la seule regle qui protege reellement l'accessibilite de l'app.
+    avoid_print: true
+    prefer_const_constructors: true
+    prefer_const_constructors_in_immutables: true
+    prefer_final_locals: true
+    unawaited_futures: true
+    unnecessary_await_in_return: true
+    use_super_parameters: true
+
+analyzer:
+  exclude:
+    - '**/*.g.dart'
+    - build/**
+    - android/**

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Le beige de la charte, jamais le blanc : see mboa_colors.dart -->
+    <item android:drawable="@color/mboa_background"/>
+
+    <!--
+      Le logo officiel, en dimensions reelles. Il est place en nodpi pour
+      qu'Android ne le mise pas d'un facteur de densite : un logo de 1024 px
+      rendu a 3x sur un telephone hdpi deviendrait une tache floue, et la
+      charte interdit de le retoucher.
+    -->
+    <item
+        android:gravity="center"
+        android:width="300dp"
+        android:height="300dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/mboa_bio_237"
+            android:antialias="true"
+            android:filter="true"/>
+    </item>
+
+</layer-list>

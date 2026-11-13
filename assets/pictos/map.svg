@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke="#212121" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <title>Carte : les villages</title>
+  <path d="M3 6.4 9 3.8l6 2.6 6-2.6v13.6L15 20.2l-6-2.6L3 20.2z"/>
+  <path d="M9 3.8v13.8M15 6.4v13.8"/>
+</svg>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+      Le splash natif. Il tient l'ecran pendant que le moteur Dart demarre,
+      et il montre exactement le logo fourni : la charte interdit de le
+      regenerer, il est donc affiche tel quel, en plein centre, sur le beige
+      de l'app.
+    -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--
+      Le theme normal prend le relais des que Flutter dessine sa premiere
+      frame. Le fond reste le beige de la charte (#F8F9E9) : un passage par
+      le blanc entre les deux se verrait, et sur un ecran a luminosite
+      maximale ce clignement est penible.
+    -->
+    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">@color/mboa_background</item>
+    </style>
+
+</resources>

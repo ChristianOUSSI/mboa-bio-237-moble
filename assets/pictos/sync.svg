@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke="#212121" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <title>Flèches : envoi des données au réseau</title>
+  <path d="M20 12a8 8 0 0 1-13.8 5.5"/>
+  <path d="M4 12a8 8 0 0 1 13.8-5.5"/>
+  <path d="M17.8 3v3.5h-3.5M6.2 21v-3.5h3.5"/>
+</svg>

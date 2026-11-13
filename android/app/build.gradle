@@ -1,0 +1,151 @@
+// ============================================================================
+// MBOA BIO 237 - configuration du module app
+//
+// Quatre flavors, un seul code. Chaque flavor produit une APK distincte,
+// installable cote a cote sur le meme telephone : une mama peut avoir les
+// quatre apps ouvertes sans jamais se deconnecter de l'une pour l'autre.
+//
+//   flutter build apk --release --flavor fournisseur \
+//     --dart-define=MBOA_ROLE=fournisseur \
+//     --dart-define=SUPABASE_URL=https://XXXX.supabase.co \
+//     --dart-define=SUPABASE_ANON_KEY=eyJ...
+//
+// Le --dart-define est indispensable : le flavor ne change que Android,
+// c'est la constante Dart qui choisit l'ecran racine.
+// ============================================================================
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader -> localProperties.load(reader) }
+}
+
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode") ?: "1"
+def flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.0"
+
+// Le keystore de release n'est jamais dans le depot. Sans lui, l'APK release
+// est signee avec la cle de debug : suffisant pour tester au village,
+// insuffisant pour le Play Store.
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader("UTF-8") { reader -> keystoreProperties.load(reader) }
+}
+
+android {
+    namespace "bio.mboa.mboa_bio"
+    compileSdk 34
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        // Les dates de commande et les horodatages de message vocal traversent
+        // le fuseau horaire du Cameroun, toujours UTC+1 sans changement d'heure.
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    defaultConfig {
+        applicationId "bio.mboa.mboa_bio"
+        // 21 : la limite basse des Tecno et Infinix encore en service dans les
+        // villages de l'Ouest. Descendre plus ferait perdre la camera2 API.
+        minSdk 21
+        targetSdk 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+
+        // Les notes vocales sont de l'AAC/LC : sans desugaring, l'API
+        // manquante sur certaines ROMs d'entree de gamme.
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        if (keystorePropertiesFile.exists()) {
+            release {
+                keyAlias keystoreProperties["keyAlias"]
+                keyPassword keystoreProperties["keyPassword"]
+                storeFile file(keystoreProperties["storeFile"])
+                storePassword keystoreProperties["storePassword"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig keystorePropertiesFile.exists()
+                    ? signingConfigs.release
+                    : signingConfigs.debug
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    flavorDimensions "role"
+
+    productFlavors {
+        fournisseur {
+            dimension "role"
+            applicationIdSuffix ".fournisseur"
+            versionNameSuffix "-fournisseur"
+            resValue "string", "app_name", "MBOA FOURNISSEUR"
+            resValue "string", "app_sous_titre", "Ajouter ma récolte"
+        }
+
+        admin {
+            dimension "role"
+            applicationIdSuffix ".admin"
+            versionNameSuffix "-admin"
+            resValue "string", "app_name", "MBOA ADMIN"
+            resValue "string", "app_sous_titre", "Contrôle qualité"
+        }
+
+        consommateur {
+            dimension "role"
+            // Pas de suffixe : c'est l'app du public, celle dont l'identifiant
+            // doit rester le plus court et le plus stable dans le temps.
+            versionNameSuffix "-conso"
+            resValue "string", "app_name", "MBOA BIO 237"
+            resValue "string", "app_sous_titre", "Le marché des villages"
+        }
+
+        livreur {
+            dimension "role"
+            applicationIdSuffix ".livreur"
+            versionNameSuffix "-livreur"
+            resValue "string", "app_name", "MBOA LIVREUR"
+            resValue "string", "app_sous_titre", "Mes courses du jour"
+        }
+    }
+
+    // Le logo est un JPEG de 280 Ko : on le declare en nodpi pour qu'Android
+    // ne le redimensionne pas a chaque lancement du splash natif.
+    androidResources {
+        noCompress "jpeg", "jpg", "png"
+    }
+}
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.0.4"
+    // ExifInterface n'est pas utilise par le code Dart, mais la camera2
+    // d'image_picker en a besoin pour lire l'orientation des JPEG de telephone.
+    implementation "androidx.exifinterface:exifinterface:1.3.7"
+}

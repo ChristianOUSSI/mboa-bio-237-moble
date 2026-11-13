@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke="#212121" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <title>Viandes et œufs</title>
+  <path d="M6.4 7.6c4-2 9.6-.8 11.8 3 2 3.6.4 7.8-3.4 9.2-4.2 1.4-9-.6-10.6-4.4-1.2-3 .2-6 2.2-7.8z"/>
+  <circle cx="8.6" cy="9.6" r="1.6"/>
+  <path d="M18.4 18c1.8.8 3.6.2 4.4-1.4"/>
+</svg>

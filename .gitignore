@@ -1,0 +1,34 @@
+# Outillage Flutter et Android
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+pubspec.lock
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/debug/
+android/app/profile/
+*.keystore
+*.jks
+*.aab
+*.apk
+dist/
+
+# Credentials : l'URL et la cle anon sont publiques, mais elles n'ont rien a
+# faire dans un depot qui sera un jour partage avec un operateur de paiement.
+.env.local
+.env
+
+# Generateurs : les pictogrammes SVG sont commites, leur source aussi, mais
+# le dossier de travail ne l'est pas.
+.scaffold_flutter/
+
+# Editeurs
+.idea/
+.vscode/
+*.iml
+
+# Chutes de tests terrain
+*.log

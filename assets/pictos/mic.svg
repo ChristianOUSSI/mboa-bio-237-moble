@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke="#212121" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <title>Micro : parler / commander à la voix</title>
+  <rect x="9" y="2.8" width="6" height="11.2" rx="3"/>
+  <path d="M5.4 11.4a6.6 6.6 0 0 0 13.2 0"/>
+  <path d="M12 18.2V21.4M8.6 21.4h6.8"/>
+</svg>

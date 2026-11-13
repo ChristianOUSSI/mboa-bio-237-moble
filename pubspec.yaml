@@ -1,0 +1,88 @@
+name: mboa_bio
+description: 'MBOA BIO 237 - marketplace vivrier ultra-accessible, Cameroun. Une codebase, trois flavors.'
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.22.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Etat : Riverpod, pas de Redux (impose par la spec).
+  flutter_riverpod: ^2.5.1
+
+  # Backend unique pour les 3 roles : Postgres + Auth + Storage + Realtime.
+  supabase_flutter: ^2.6.0
+
+  # Design system icon-first : les pictogrammes sont des SVG au trait.
+  flutter_svg: ^2.0.10
+
+  # Offline-first : un Tecno sans credit 3G doit rester utilisable au champ.
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  shared_preferences: ^2.2.3
+  connectivity_plus: ^6.0.3
+
+  # Voix : lire les libelles et dicter une commande.
+  flutter_tts: ^4.0.2
+  speech_to_text: ^6.6.0
+  record: ^5.1.2
+  audioplayers: ^6.1.0
+
+  # Photo du visage, photo du tas, appel du fournisseur.
+  image_picker: ^1.1.2
+  url_launcher: ^6.3.0
+  path_provider: ^2.1.3
+
+  # Partager la liste de marche filigranee sur WhatsApp.
+  share_plus: ^7.2.2
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  # Genere les icones de lanceur a partir du logo officiel, pour les trois
+  # flavors. Un coup de `dart run flutter_launcher_icons` et plus rien n'est
+  # a retoucher a la main dans res/mipmap-*.
+  flutter_launcher_icons: ^0.13.1
+
+# =============================================================================
+# Icones de lanceur
+#
+# Le meme logo officiel sert de base aux trois apps : la charte l'impose. Ce
+# qui les distingue dans le lanceur, c'est le nom (resValue par flavor), pas
+# une version recoupee du visuel.
+# =============================================================================
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: false
+  image_path: "assets/logo/mboa_bio_237.jpeg"
+  # Le logo est deja un badge ferme : pas de recadrage, pas d'arriere-plan
+  # ajoute. `adaptive_icon_background` reste la couleur de la charte.
+  adaptive_icon_background: "#F8F9E9"
+  adaptive_icon_foreground: "assets/logo/mboa_bio_237.jpeg"
+  remove_alpha_ios: true
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    # Nunito variable (200-1000) : le Black 900 est obtenu par
+    # FontVariation('wght', 900), d'ou un seul fichier pour toute la typo.
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito.ttf
+
+  assets:
+    - assets/logo/
+    - assets/pictos/
+    - assets/produits/
